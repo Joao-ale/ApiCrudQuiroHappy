@@ -1,0 +1,20 @@
+CREATE TABLE HistoricoClinicoDoencas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    paciente_id INT,
+    hipertensao ENUM('Sim', 'Não'),
+    diabetes ENUM('Sim', 'Não'),
+    dislipidemias ENUM('Sim', 'Não'),
+    renal ENUM('Sim', 'Não'),
+    hepatica ENUM('Sim', 'Não'),
+    cardiovascular ENUM('Sim', 'Não'),
+    osteoporose ENUM('Sim', 'Não'),
+    cancer ENUM('Sim', 'Não'),
+    respiratoria ENUM('Sim', 'Não'),
+    genitoUrinaria ENUM('Sim', 'Não'),
+    gastrointestinal ENUM('Sim', 'Não'),
+    endocrina ENUM('Sim', 'Não'),
+    pele ENUM('Sim', 'Não'),
+    osteomioarticular ENUM('Sim', 'Não'),
+    neurologica ENUM('Sim', 'Não'),
+    FOREIGN KEY (paciente_id) REFERENCES Paciente(id)
+);
