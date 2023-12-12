@@ -25,5 +25,3 @@ Para começar a utilizar a API QuiroHappy, siga estas etapas:
 ## Contribuições
 
 Este repositório está aberto a contribuições. Se você deseja melhorar ou expandir a funcionalidade da API QuiroHappy, sinta-se à vontade para fazer um fork do repositório e enviar suas contribuições por meio de pull requests.
-
-Obrigado por escolher a API QuiroHappy!
