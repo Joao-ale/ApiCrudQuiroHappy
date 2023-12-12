@@ -9,3 +9,4 @@ class ApiCrudQuiroHappyApplication
 fun main(args: Array<String>) {
 	runApplication<ApiCrudQuiroHappyApplication>(*args)
 }
+

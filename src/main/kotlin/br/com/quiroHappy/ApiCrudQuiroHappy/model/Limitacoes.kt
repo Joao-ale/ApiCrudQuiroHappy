@@ -2,7 +2,7 @@ package br.com.quiroHappy.ApiCrudQuiroHappy.model
 
 data class Limitacoes(
     val id: Long,
-    val nome: String
+    var nome: String
 ) {
     val limitacoesPredef = listOf<Limitacoes>(
         Limitacoes(1,"Cognitiva"),

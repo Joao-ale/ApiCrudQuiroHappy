@@ -1,18 +1,34 @@
 package br.com.quiroHappy.ApiCrudQuiroHappy.model
 
 import br.com.quiroHappy.ApiCrudQuiroHappy.enums.Ocupacao
-import java.time.LocalDateTime
+import jakarta.persistence.*
 
+@Entity
 data class Prontuario(
-    val id: Long,
-    val dataAbertura: LocalDateTime = LocalDateTime.now(),
-    val fichaAnamnese: FichaAnamnese,
-    val endereco: String,
-    val telefones: MutableList<String>,
-    val telefoneRespon: String? = null,
-    val quiropraxista: String,
-    val ocupacao: Ocupacao,
-    val limitacao: MutableList<Long>,
-    val alergia: String?,
-    val queixaDores: String?
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long? = null,
+
+    @ManyToOne
+    @JoinColumn(name = "anamnese_id")
+    var fichaAnamnese: FichaAnamnese? = null,
+
+    @Column(nullable = false)
+    var endereco: String,
+
+    var telefone: String? = null,
+
+    var telefoneRespon: String? = null,
+
+    @Column(nullable = false)
+    var quiropraxista: String,
+
+    @Enumerated(EnumType.STRING)
+    var ocupacao: Ocupacao,
+
+    @ElementCollection
+    var limitacao: MutableList<Long> = mutableListOf(),
+
+    var alergia: String? = null,
+
+    var queixaDores: String? = null
 )

@@ -1,4 +1,4 @@
-CREATE TABLE paciente (
+CREATE TABLE Paciente (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,
     numeroProntuario VARCHAR(255) NOT NULL,

@@ -1,6 +1,19 @@
 package br.com.quiroHappy.ApiCrudQuiroHappy.model
 
+import jakarta.persistence.Entity
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.GenerationType
+import jakarta.persistence.Id
+import jakarta.persistence.JoinColumn
+import jakarta.persistence.ManyToOne
+
+@Entity
 data class Segmentos (
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long?   = null,
+    @ManyToOne
+    @JoinColumn(name = "paciente_id")
+    val pacienteId: Paciente,
     val c1: String? = null,
     val c2: String? = null,
     val c3: String? = null,

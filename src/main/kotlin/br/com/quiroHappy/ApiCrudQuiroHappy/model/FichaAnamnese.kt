@@ -1,27 +1,32 @@
 package br.com.quiroHappy.ApiCrudQuiroHappy.model
 
-import java.time.LocalDateTime
-import java.util.Date
+import jakarta.persistence.Entity
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.GenerationType
+import jakarta.persistence.Id
+import jakarta.persistence.JoinColumn
+import jakarta.persistence.ManyToOne
+import java.time.LocalDate
 
+@Entity
 data class FichaAnamnese (
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
-    val dataCriacao: LocalDateTime = LocalDateTime.now(),
-    val nome:String,
-    val dataNasc: Date,
-    val sexo: String,
-    val ocupProfissional: String? = null,
-    val Responsavel: String? = null,
-    val peso: Long,
-    val altura: Long,
-    val protese: Boolean,
-    val tipoProtese: String? = null,
-    val internCirurg:String? = null,
-    val traumasQuedas: String? = null,
-    val tabagismo: Boolean,
-    val etilismo: Boolean,
-    val histDoencas: List<Long>,
-    val exames: String?,
-    val historicoAtual: String?,
-    val tecObs: String?,
-    val segmentos: List<Segmentos>
+
+    @ManyToOne
+    @JoinColumn(name = "paciente_id")
+    val paciente: Paciente, // Alterado para a classe Paciente
+    var nomeCompleto: String,
+    var dataNasc: LocalDate,
+    var sexo: String,
+    var ocupacaoProfissional: String? = null,
+    var atividadeFisica: Boolean,
+    var peso: Float,
+    var altura: Float,
+    var protese: Boolean,
+    var internacaoCirurgias: Boolean,
+    var traumasQuedas: Boolean,
+    var tabagismo: Boolean,
+    var etilismo: Boolean,
+    var qualidadeSono: String?
 )
