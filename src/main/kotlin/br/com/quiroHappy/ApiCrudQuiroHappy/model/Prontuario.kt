@@ -1,5 +1,7 @@
 package br.com.quiroHappy.ApiCrudQuiroHappy.model
 
+
+import br.com.quiroHappy.ApiCrudQuiroHappy.enums.Limitacoes
 import br.com.quiroHappy.ApiCrudQuiroHappy.enums.Ocupacao
 import jakarta.persistence.*
 
@@ -25,8 +27,11 @@ data class Prontuario(
     @Enumerated(EnumType.STRING)
     var ocupacao: Ocupacao,
 
-    @ElementCollection
-    var limitacao: MutableList<Long> = mutableListOf(),
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "prontuario_limitacoes", joinColumns = [JoinColumn(name = "prontuario_id")])
+    @Column(name = "limitacao", nullable = false, columnDefinition = "TEXT")
+    @Enumerated(EnumType.STRING)
+    var limitacoes: MutableSet<Limitacoes> = mutableSetOf(),
 
     var alergia: String? = null,
 

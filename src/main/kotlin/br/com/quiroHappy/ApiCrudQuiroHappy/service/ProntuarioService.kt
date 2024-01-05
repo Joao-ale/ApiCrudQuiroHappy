@@ -41,7 +41,7 @@ class ProntuarioService(private val prontuarioRepository: ProntuarioRepository) 
         existingProntuario.telefoneRespon = updatedProntuario.telefoneRespon
         existingProntuario.quiropraxista = updatedProntuario.quiropraxista
         existingProntuario.ocupacao = updatedProntuario.ocupacao
-        existingProntuario.limitacao = updatedProntuario.limitacao
+        existingProntuario.limitacoes = updatedProntuario.limitacoes
         existingProntuario.alergia = updatedProntuario.alergia
         existingProntuario.queixaDores = updatedProntuario.queixaDores
 

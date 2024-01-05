@@ -2,7 +2,7 @@ package br.com.quiroHappy.ApiCrudQuiroHappy.service
 
 import br.com.quiroHappy.ApiCrudQuiroHappy.enums.Errors
 import br.com.quiroHappy.ApiCrudQuiroHappy.exception.NotFoundException
-import br.com.quiroHappy.ApiCrudQuiroHappy.model.Limitacoes
+import br.com.quiroHappy.ApiCrudQuiroHappy.enums.Limitacoes
 import br.com.quiroHappy.ApiCrudQuiroHappy.repository.LimitacoesRepository
 
 class LimitacoesService(private val limitacoesRepository: LimitacoesRepository) {

@@ -1,6 +1,6 @@
 package br.com.quiroHappy.ApiCrudQuiroHappy.controller
 
-import br.com.quiroHappy.ApiCrudQuiroHappy.model.Limitacoes
+import br.com.quiroHappy.ApiCrudQuiroHappy.enums.Limitacoes
 import br.com.quiroHappy.ApiCrudQuiroHappy.service.LimitacoesService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
