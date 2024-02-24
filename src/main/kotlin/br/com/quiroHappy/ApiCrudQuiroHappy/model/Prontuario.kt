@@ -1,7 +1,14 @@
 package br.com.quiroHappy.ApiCrudQuiroHappy.model
 
-import br.com.quiroHappy.ApiCrudQuiroHappy.enums.Ocupacao
-import jakarta.persistence.*
+import jakarta.persistence.Column
+import jakarta.persistence.Entity
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.GenerationType
+import jakarta.persistence.Id
+import jakarta.persistence.JoinColumn
+import jakarta.persistence.JoinTable
+import jakarta.persistence.ManyToMany
+import jakarta.persistence.ManyToOne
 
 @Entity
 data class Prontuario(
@@ -10,7 +17,7 @@ data class Prontuario(
 
     @ManyToOne
     @JoinColumn(name = "anamnese_id")
-    var fichaAnamnese: FichaAnamnese? = null,
+    var fichaAnamnese: FichaAnamnese,
 
     @Column(nullable = false)
     var endereco: String,
@@ -22,7 +29,6 @@ data class Prontuario(
     @Column(nullable = false)
     var quiropraxista: String,
 
-    @Enumerated(EnumType.STRING)
     var ocupacao: Ocupacao,
 
     @ManyToMany

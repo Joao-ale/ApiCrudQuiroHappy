@@ -14,5 +14,7 @@ enum class Errors(val code: String, val message: String) {
     //Limitacoes 351 - 400
     QR351("QR-351", "Limitacao [%] não existente"),
     //Paciente 401 - 450
-    QR401("QR-401", "Paciente [%] não existente")
+    QR401("QR-401", "Paciente [%] não existente"),
+    //Ocupacao 451 - 500
+    QR451("QR-451", "Ocupacao [%] não existente")
 }

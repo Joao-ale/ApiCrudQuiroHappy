@@ -11,8 +11,14 @@ class FichaAnamneseService(private val fichaAnamneseRepository: FichaAnamneseRep
         return fichaAnamneseRepository.findAll()
     }
 
-    fun getFichaAnamneseById(id: Long): FichaAnamnese? {
-        return fichaAnamneseRepository.findById(id).orElse(null)
+    fun getFichaAnamneseById(id: Long): FichaAnamnese {
+        return fichaAnamneseRepository.findById(id)
+            .orElseThrow {
+                NotFoundException(
+                    Errors.QR151.message.format(id),
+                    Errors.QR151.code
+                )
+            }
     }
 
     fun createFichaAnamnese(fichaAnamnese: FichaAnamnese): FichaAnamnese {

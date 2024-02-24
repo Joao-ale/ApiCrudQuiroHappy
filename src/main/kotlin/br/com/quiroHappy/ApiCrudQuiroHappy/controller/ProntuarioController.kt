@@ -1,5 +1,8 @@
 package br.com.quiroHappy.ApiCrudQuiroHappy.controller
 
+import br.com.quiroHappy.ApiCrudQuiroHappy.controller.response.ProntuarioAtualizadoForm
+import br.com.quiroHappy.ApiCrudQuiroHappy.controller.response.ProntuarioForm
+import br.com.quiroHappy.ApiCrudQuiroHappy.controller.response.ProntuarioView
 import br.com.quiroHappy.ApiCrudQuiroHappy.model.Prontuario
 import br.com.quiroHappy.ApiCrudQuiroHappy.service.ProntuarioService
 import org.springframework.http.HttpStatus
@@ -11,7 +14,7 @@ import org.springframework.web.bind.annotation.*
 class ProntuarioController(private val prontuarioService: ProntuarioService) {
 
     @GetMapping
-    fun getAllProntuarios(): ResponseEntity<List<Prontuario>> {
+    fun getAllProntuarios(): ResponseEntity<List<ProntuarioView>> {
         val prontuarios = prontuarioService.getAllProntuarios()
         return ResponseEntity(prontuarios, HttpStatus.OK)
     }
@@ -23,7 +26,7 @@ class ProntuarioController(private val prontuarioService: ProntuarioService) {
     }
 
     @PostMapping
-    fun createProntuario(@RequestBody prontuario: Prontuario): ResponseEntity<Prontuario> {
+    fun createProntuario(@RequestBody prontuario: ProntuarioForm): ResponseEntity<ProntuarioView> {
         val createdProntuario = prontuarioService.createProntuario(prontuario)
         return ResponseEntity(createdProntuario, HttpStatus.CREATED)
     }
@@ -31,8 +34,8 @@ class ProntuarioController(private val prontuarioService: ProntuarioService) {
     @PutMapping("/{id}")
     fun updateProntuario(
         @PathVariable id: Long,
-        @RequestBody updatedProntuario: Prontuario
-    ): ResponseEntity<Prontuario> {
+        @RequestBody updatedProntuario: ProntuarioAtualizadoForm
+    ): ResponseEntity<ProntuarioView> {
         val updated = prontuarioService.updateProntuario(id, updatedProntuario)
         return ResponseEntity(updated, HttpStatus.OK)
     }
