@@ -13,7 +13,7 @@ data class Topicos (
     val id: Long? = null,
     @ManyToOne
     @JoinColumn(name = "paciente_id")
-    var pacienteId: Paciente, // Relacionamento com Paciente
+    var pacienteId: Paciente,
     var examImagem: String?,
     var historicoCond: String?,
     var tecObs: String?

@@ -1,35 +1,37 @@
 package br.com.quiroHappy.ApiCrudQuiroHappy.controller
 
-import br.com.quiroHappy.ApiCrudQuiroHappy.model.FichaAnamnese
-import br.com.quiroHappy.ApiCrudQuiroHappy.service.FichaAnamneseService
+import br.com.quiroHappy.ApiCrudQuiroHappy.dto.AnamneseForm
+import br.com.quiroHappy.ApiCrudQuiroHappy.dto.AnamneseUpdatedForm
+import br.com.quiroHappy.ApiCrudQuiroHappy.dto.AnamneseView
+import br.com.quiroHappy.ApiCrudQuiroHappy.service.AnamneseService
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/ficha-anamnese")
-class FichaAnamneseController(private val fichaAnamneseService: FichaAnamneseService) {
+class FichaAnamneseController(private val anamneseService: AnamneseService) {
 
     @GetMapping
-    fun getAllFichaAnamnese(): List<FichaAnamnese> {
-        return fichaAnamneseService.getFichaAnamneses()
+    fun getAllFichaAnamnese(): List<AnamneseView> {
+        return anamneseService.getFichaAnamneses()
     }
 
     @GetMapping("/{id}")
-    fun getFichaAnamneseById(@PathVariable id: Long): FichaAnamnese? {
-        return fichaAnamneseService.getFichaAnamneseById(id)
+    fun getFichaAnamneseById(@PathVariable id: Long): AnamneseView? {
+        return anamneseService.getFichaAnamneseById(id)
     }
 
     @PostMapping
-    fun createFichaAnamnese(@RequestBody fichaAnamnese: FichaAnamnese): FichaAnamnese {
-        return fichaAnamneseService.createFichaAnamnese(fichaAnamnese)
+    fun createFichaAnamnese(@RequestBody anamnese: AnamneseForm): AnamneseView {
+        return anamneseService.createFichaAnamnese(anamnese)
     }
 
     @PutMapping("/{id}")
-    fun updateFichaAnamnese(@PathVariable id: Long, @RequestBody updatedFichaAnamnese: FichaAnamnese): FichaAnamnese {
-        return fichaAnamneseService.updateFichaAnamnese(id, updatedFichaAnamnese)
+    fun updateFichaAnamnese(@PathVariable id: Long, @RequestBody updatedAnamnese: AnamneseUpdatedForm): AnamneseView {
+        return anamneseService.updateFichaAnamnese(id, updatedAnamnese)
     }
 
     @DeleteMapping("/{id}")
     fun deleteFichaAnamnese(@PathVariable id: Long) {
-        fichaAnamneseService.deleteFichaAnamnese(id)
+        anamneseService.deleteFichaAnamnese(id)
     }
 }

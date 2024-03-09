@@ -1,10 +1,12 @@
-package br.com.quiroHappy.ApiCrudQuiroHappy.controller.response
+package br.com.quiroHappy.ApiCrudQuiroHappy.dto
 
 import br.com.quiroHappy.ApiCrudQuiroHappy.model.Limitacoes
+import org.springframework.stereotype.Component
 
-
+@Component
 data class ProntuarioForm(
     val idFichaAnamnese: Long,
+    val cpf: String,
     val endereco: String,
     val telefone: String? = null,
     val telefoneRespon: String? = null,

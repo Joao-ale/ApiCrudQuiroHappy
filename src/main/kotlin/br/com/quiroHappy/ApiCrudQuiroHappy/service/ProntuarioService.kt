@@ -1,14 +1,15 @@
 package br.com.quiroHappy.ApiCrudQuiroHappy.service
 
-import br.com.quiroHappy.ApiCrudQuiroHappy.controller.response.ProntuarioAtualizadoForm
-import br.com.quiroHappy.ApiCrudQuiroHappy.controller.response.ProntuarioForm
-import br.com.quiroHappy.ApiCrudQuiroHappy.controller.response.ProntuarioView
+import br.com.quiroHappy.ApiCrudQuiroHappy.dto.ProntuarioForm
+import br.com.quiroHappy.ApiCrudQuiroHappy.dto.ProntuarioUpdatedForm
+import br.com.quiroHappy.ApiCrudQuiroHappy.dto.ProntuarioView
 import br.com.quiroHappy.ApiCrudQuiroHappy.enums.Errors
 import br.com.quiroHappy.ApiCrudQuiroHappy.exception.NotFoundException
 import br.com.quiroHappy.ApiCrudQuiroHappy.mapper.ProntuarioFormMapper
 import br.com.quiroHappy.ApiCrudQuiroHappy.mapper.ProntuarioViewMapper
 import br.com.quiroHappy.ApiCrudQuiroHappy.model.Prontuario
 import br.com.quiroHappy.ApiCrudQuiroHappy.repository.ProntuarioRepository
+import org.springframework.data.jpa.domain.AbstractPersistable_.id
 import org.springframework.stereotype.Service
 
 @Service
@@ -20,8 +21,8 @@ class ProntuarioService(
 
     fun getAllProntuarios(): List<ProntuarioView> {
         val prontuarios = prontuarioRepository.findAll()
-        val prontuariosView: List<ProntuarioView> = ArrayList()
-        prontuarios.forEach{prontuario ->
+        val prontuariosView : List<ProntuarioView> = ArrayList()
+        prontuarios.forEach { prontuario ->
             prontuariosView.plus(prontuarioViewMapper.map(prontuario))
         }
 
@@ -29,13 +30,25 @@ class ProntuarioService(
         return prontuariosView
     }
 
-    fun getProntuarioById(id: Long): Prontuario? {
-        return prontuarioRepository.findById(id).orElseThrow {
+    fun getProntuarioById(id: Long): ProntuarioView {
+        val prontuario = prontuarioRepository.findById(id).orElseThrow {
             NotFoundException(
                 Errors.QR101.message.format(id),
                 Errors.QR101.code
             )
         }
+
+        return prontuarioViewMapper.map(prontuario)
+    }
+    fun getProntuarioByCpf(cpf: Long): ProntuarioView {
+        val prontuario = prontuarioRepository.findById(cpf).orElseThrow {
+            NotFoundException(
+                Errors.QR101.message.format(id),
+                Errors.QR101.code
+            )
+        }
+
+        return prontuarioViewMapper.map(prontuario)
     }
 
     fun createProntuario(form: ProntuarioForm): ProntuarioView {
@@ -43,7 +56,7 @@ class ProntuarioService(
         return prontuarioViewMapper.map(prontuario)
     }
 
-    fun updateProntuario(id: Long, form: ProntuarioAtualizadoForm): ProntuarioView {
+    fun updateProntuario(id: Long, form: ProntuarioUpdatedForm): ProntuarioView {
         val existingProntuario = prontuarioRepository.findById(id)
             .orElseThrow {
                 NotFoundException(
@@ -52,8 +65,9 @@ class ProntuarioService(
                 )
             }
         val prontuario = Prontuario(
-            id = form.id,
-            fichaAnamnese = existingProntuario.fichaAnamnese,
+            id = existingProntuario.id,
+            anamnese = existingProntuario.anamnese,
+            cpf = existingProntuario.cpf,
             endereco = form.endereco,
             telefone = form.telefone,
             telefoneRespon = form.telefoneRespon,

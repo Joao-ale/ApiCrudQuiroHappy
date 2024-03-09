@@ -1,10 +1,10 @@
-package br.com.quiroHappy.ApiCrudQuiroHappy.controller.response
+package br.com.quiroHappy.ApiCrudQuiroHappy.dto
 
 import br.com.quiroHappy.ApiCrudQuiroHappy.model.Limitacoes
 import br.com.quiroHappy.ApiCrudQuiroHappy.model.Ocupacao
 
-data class ProntuarioAtualizadoForm(
-    val id: Long?,
+
+data class ProntuarioUpdatedForm(
     val endereco: String,
     val telefone: String? = null,
     val telefoneRespon: String? = null,

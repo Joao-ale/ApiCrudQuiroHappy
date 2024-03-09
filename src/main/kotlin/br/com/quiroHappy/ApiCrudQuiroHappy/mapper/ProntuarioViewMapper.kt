@@ -1,6 +1,6 @@
 package br.com.quiroHappy.ApiCrudQuiroHappy.mapper
 
-import br.com.quiroHappy.ApiCrudQuiroHappy.controller.response.ProntuarioView
+import br.com.quiroHappy.ApiCrudQuiroHappy.dto.ProntuarioView
 import br.com.quiroHappy.ApiCrudQuiroHappy.model.Prontuario
 
 class ProntuarioViewMapper(
@@ -8,7 +8,8 @@ class ProntuarioViewMapper(
     override fun map(t: Prontuario): ProntuarioView {
         return ProntuarioView(
             id = t.id,
-            fichaAnamnese =  t.fichaAnamnese,
+            anamnese =  t.anamnese,
+            cpf = t.cpf,
             endereco = t.endereco,
             telefone = t.telefone,
             telefoneRespon = t.telefoneRespon,

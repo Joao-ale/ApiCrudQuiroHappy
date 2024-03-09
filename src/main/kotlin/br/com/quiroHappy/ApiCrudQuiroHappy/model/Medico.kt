@@ -11,5 +11,6 @@ data class Medico(
     val id: Long? = null,
     var nome: String,
     var crm: String,
-    val especialidade: String
+    val especialidade: String,
+    val pacientes: List<Paciente>
 )
