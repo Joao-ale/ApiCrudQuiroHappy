@@ -6,6 +6,8 @@ import java.time.LocalDate
 @Component
 data class AnamneseForm(
     val idPaciente: Long,
+    val segmentos: List<String>,
+    val doencas: List<String>,
     val nomeCompleto: String,
     val dataNasc: LocalDate,
     val sexo: String,

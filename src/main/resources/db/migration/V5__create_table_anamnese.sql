@@ -1,0 +1,21 @@
+CREATE TABLE Anamnese (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    paciente_id BIGINT,
+    segmentos_id BIGINT,
+    doencas_id BIGINT,
+    nomeCompleto VARCHAR(255) NOT NULL,
+    dataNasc DATE NOT NULL,
+    sexo VARCHAR(10) NOT NULL,
+    ocupacaoProfissional VARCHAR(255),
+    peso FLOAT NOT NULL,
+    altura FLOAT NOT NULL,
+    protese VARCHAR(255),
+    internacaoCirurgias VARCHAR(255),
+    traumasQuedas VARCHAR(255) NOT NULL,
+    tabagismo BOOLEAN NOT NULL,
+    etilismo BOOLEAN NOT NULL,
+    qualidadeSono VARCHAR(255),
+    FOREIGN KEY (paciente_id) REFERENCES Paciente(id),
+    FOREIGN KEY (segmentos_id) REFERENCES Segmentos(id),
+    FOREIGN KEY (doencas_id) REFERENCES Doencas(id)
+);

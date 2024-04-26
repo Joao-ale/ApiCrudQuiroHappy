@@ -1,14 +1,11 @@
 package br.com.quiroHappy.ApiCrudQuiroHappy.model
 
-import br.com.quiroHappy.ApiCrudQuiroHappy.dto.AnamneseView
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
-import jakarta.persistence.JoinTable
-import jakarta.persistence.ManyToMany
 import jakarta.persistence.ManyToOne
 
 @Entity
@@ -18,7 +15,7 @@ data class Prontuario(
 
     @ManyToOne
     @JoinColumn(name = "anamnese_id")
-    var anamnese: AnamneseView,
+    var anamnese: Anamnese,
 
     @Column
     var cpf: String,
@@ -32,20 +29,11 @@ data class Prontuario(
     @Column
     var telefoneRespon: String? = null,
 
-    @Column(nullable = false)
-    var quiropraxista: String,
-
     @ManyToOne
-    @JoinTable(name = "ocupacao_id")
-    var ocupacao: Ocupacao,
+    @JoinColumn(name = "medico_id", nullable = false)
+    var medico: Medico,
 
-    @ManyToMany
-    @JoinTable(
-        name = "prontuario_limitacoes",
-        joinColumns = [JoinColumn(name = "prontuario_id")],
-        inverseJoinColumns = [JoinColumn(name = "limitacao_id")]
-    )
-    var limitacoes: MutableSet<Limitacoes> = mutableSetOf(),
+    var limitacoes: MutableSet<String> = mutableSetOf(),
 
     @Column
     var alergia: String? = null,

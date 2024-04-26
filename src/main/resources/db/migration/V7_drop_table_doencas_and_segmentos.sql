@@ -1,0 +1,2 @@
+DROP TABLE IF EXISTS doencas;
+DROP TABLE IF EXISTS segmentos;

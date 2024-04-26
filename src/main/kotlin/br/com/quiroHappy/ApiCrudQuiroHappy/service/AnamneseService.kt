@@ -7,9 +7,10 @@ import br.com.quiroHappy.ApiCrudQuiroHappy.enums.Errors
 import br.com.quiroHappy.ApiCrudQuiroHappy.exception.NotFoundException
 import br.com.quiroHappy.ApiCrudQuiroHappy.mapper.AnamneseFormMapper
 import br.com.quiroHappy.ApiCrudQuiroHappy.mapper.AnamneseViewMapper
-import br.com.quiroHappy.ApiCrudQuiroHappy.model.Anamnese
 import br.com.quiroHappy.ApiCrudQuiroHappy.repository.FichaAnamneseRepository
+import org.springframework.stereotype.Service
 
+@Service
 class AnamneseService(
     private val anamneseRepository: FichaAnamneseRepository,
     private val anamneseViewMapper: AnamneseViewMapper,
@@ -45,8 +46,8 @@ class AnamneseService(
         return anamneseViewMapper.map(fichaAnamnese)
     }
 
-    fun updateFichaAnamnese(id: Long, updatedAnamnese: AnamneseUpdatedForm): AnamneseView {
-        val existingFichaAnamnese = anamneseRepository.findById(id)
+    fun updateFichaAnamnese(id: Long, anamneseUpdated: AnamneseUpdatedForm): AnamneseView {
+        val fichaAnamnese = anamneseRepository.findById(id)
             .orElseThrow {
                 NotFoundException(
                     Errors.QR151.message.format(id),
@@ -54,25 +55,20 @@ class AnamneseService(
                 )
             }
 
-        val fichaAnamnese = Anamnese(
-            id = existingFichaAnamnese.id,
-            paciente = existingFichaAnamnese.paciente,
-            nomeCompleto = updatedAnamnese.nomeCompleto,
-            dataNasc = existingFichaAnamnese.dataNasc,
-            sexo = updatedAnamnese.sexo,
-            ocupacaoProfissional = updatedAnamnese.ocupacaoProfissional,
-            peso = updatedAnamnese.peso,
-            altura = updatedAnamnese.altura,
-            protese = updatedAnamnese.protese,
-            internacaoCirurgias = updatedAnamnese.internacaoCirurgias,
-            traumasQuedas = updatedAnamnese.traumasQuedas,
-            tabagismo = updatedAnamnese.tabagismo,
-            etilismo = updatedAnamnese.etilismo,
-            qualidadeSono = updatedAnamnese.qualidadeSono
-        )
+            fichaAnamnese.nomeCompleto = anamneseUpdated.nomeCompleto
+            fichaAnamnese.sexo = anamneseUpdated.sexo
+            fichaAnamnese.ocupacaoProfissional = anamneseUpdated.ocupacaoProfissional
+            fichaAnamnese.peso = anamneseUpdated.peso
+            fichaAnamnese.altura = anamneseUpdated.altura
+            fichaAnamnese.protese = anamneseUpdated.protese
+            fichaAnamnese.internacaoCirurgias = anamneseUpdated.internacaoCirurgias
+            fichaAnamnese.traumasQuedas = anamneseUpdated.traumasQuedas
+            fichaAnamnese.tabagismo = anamneseUpdated.tabagismo
+            fichaAnamnese.etilismo = anamneseUpdated.etilismo
+            fichaAnamnese.qualidadeSono = anamneseUpdated.qualidadeSono
 
-        val fichaAnamneseUpdated = anamneseRepository.save(fichaAnamnese)
-        return anamneseViewMapper.map(fichaAnamneseUpdated)
+        val newAnamnese = anamneseRepository.save(fichaAnamnese)
+        return anamneseViewMapper.map(newAnamnese)
     }
 
     fun deleteFichaAnamnese(id: Long) {

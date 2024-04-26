@@ -1,6 +1,5 @@
 package br.com.quiroHappy.ApiCrudQuiroHappy.dto
 
-import br.com.quiroHappy.ApiCrudQuiroHappy.model.Limitacoes
 import org.springframework.stereotype.Component
 
 @Component
@@ -10,9 +9,9 @@ data class ProntuarioForm(
     val endereco: String,
     val telefone: String? = null,
     val telefoneRespon: String? = null,
-    val quiropraxista: String,
+    val crmMedico: Long,
     val idOcupacao: Long,
-    val limitacoes: MutableSet<Limitacoes> = mutableSetOf(),
+    val limitacoes: MutableSet<String> = mutableSetOf(),
     val alergia: String? = null,
     val queixaDores: String? = null
 ){

@@ -4,8 +4,8 @@ import java.time.LocalDateTime
 
 data class PacienteView(
     val fichaAnamnese: AnamneseView,
-    val prontuario: ProntuarioView?,
-    val dataAgendmento: LocalDateTime?
+    val prontuario: ProntuarioView,
+    val dataAgendamento: LocalDateTime?
 ) {
 
 }

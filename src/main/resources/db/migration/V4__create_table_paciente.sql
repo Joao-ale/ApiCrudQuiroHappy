@@ -1,0 +1,4 @@
+CREATE TABLE Paciente (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    dataAgendamento DATETIME
+);

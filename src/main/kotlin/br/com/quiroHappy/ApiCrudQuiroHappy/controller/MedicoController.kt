@@ -1,9 +1,10 @@
 package br.com.quiroHappy.ApiCrudQuiroHappy.controller
 
-import br.com.quiroHappy.ApiCrudQuiroHappy.model.Medico
+import br.com.quiroHappy.ApiCrudQuiroHappy.dto.MedicoForm
+import br.com.quiroHappy.ApiCrudQuiroHappy.dto.MedicoUpdatedForm
+import br.com.quiroHappy.ApiCrudQuiroHappy.dto.MedicoView
 import br.com.quiroHappy.ApiCrudQuiroHappy.service.MedicoService
-import org.springframework.http.HttpStatus
-import org.springframework.http.ResponseEntity
+import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -11,40 +12,38 @@ import org.springframework.web.bind.annotation.*
 class MedicoController(private val medicoService: MedicoService) {
 
     @GetMapping
-    fun getMedicos(): ResponseEntity<List<Medico>> {
+    fun getMedicos(): List<MedicoView> {
         val medicos = medicoService.getMedicos()
-        return ResponseEntity(medicos, HttpStatus.OK)
+        return medicos
     }
 
     @GetMapping("/{id}")
-    fun getMedicoById(@PathVariable id: Long): ResponseEntity<Medico?> {
+    fun getMedicoById(@PathVariable id: Long): MedicoView {
         val medico = medicoService.getMedicoById(id)
-        return if (medico != null) {
-            ResponseEntity(medico, HttpStatus.OK)
-        } else {
-            ResponseEntity(HttpStatus.NOT_FOUND)
-        }
+        return medico
+    }
+
+    @GetMapping("/{crm}")
+    fun getMedicoByCrm(@PathVariable crm: Long): MedicoView {
+        val medico = medicoService.getMedicoById(crm)
+        return medico
     }
 
     @PostMapping
-    fun createMedico(@RequestBody medico: Medico): ResponseEntity<Medico> {
-        val createdMedico = medicoService.createMedico(medico)
-        return ResponseEntity(createdMedico, HttpStatus.CREATED)
+    @Transactional
+    fun createMedico(@RequestBody medico: MedicoForm): MedicoView {
+        return medicoService.createMedico(medico)
     }
 
     @PutMapping("/{id}")
-    fun updateMedico(@PathVariable id: Long, @RequestBody updatedMedico: Medico): ResponseEntity<Medico?> {
-        val updated = medicoService.updateMedico(id, updatedMedico)
-        return if (updated != null) {
-            ResponseEntity(updated, HttpStatus.OK)
-        } else {
-            ResponseEntity(HttpStatus.NOT_FOUND)
-        }
+    @Transactional
+    fun updateMedico(@PathVariable id: Long, @RequestBody medico: MedicoUpdatedForm): MedicoView {
+        return medicoService.updateMedico(id, medico)
     }
 
     @DeleteMapping("/{id}")
-    fun deleteMedico(@PathVariable id: Long): ResponseEntity<Unit> {
+    @Transactional
+    fun deleteMedico(@PathVariable id: Long){
         medicoService.deleteMedico(id)
-        return ResponseEntity(HttpStatus.NO_CONTENT)
     }
 }

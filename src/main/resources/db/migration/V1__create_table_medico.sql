@@ -1,6 +1,0 @@
-CREATE TABLE Medico (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nomeMedico VARCHAR(255) NOT NULL,
-    crm VARCHAR(255) NOT NULL,
-    especialidade VARCHAR(255)
-);

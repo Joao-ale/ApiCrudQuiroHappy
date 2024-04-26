@@ -1,4 +1,4 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+	import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
 	id("org.springframework.boot") version "3.1.4"
@@ -26,8 +26,6 @@ dependencies {
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation ("mysql:mysql-connector-java:8.0.30")
-
-	// Versão do Flyway compatível com o Spring Boot 3.1.x
 	implementation ("org.flywaydb:flyway-core")
 	implementation ("org.flywaydb:flyway-mysql")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")

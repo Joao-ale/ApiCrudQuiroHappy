@@ -1,12 +1,11 @@
 package br.com.quiroHappy.ApiCrudQuiroHappy.model
 
-import br.com.quiroHappy.ApiCrudQuiroHappy.dto.AnamneseView
-import br.com.quiroHappy.ApiCrudQuiroHappy.dto.ProntuarioView
+import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
-import jakarta.persistence.OneToMany
+import jakarta.persistence.JoinColumn
 import jakarta.persistence.OneToOne
 import java.time.LocalDateTime
 
@@ -14,9 +13,15 @@ import java.time.LocalDateTime
 data class Paciente(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
-    @OneToMany
-    var fichaAnamnese: AnamneseView,
+
     @OneToOne
-    var prontuario: ProntuarioView? = null,
+    @JoinColumn(name= "anamnese_id")
+    var anamnese: Anamnese,
+
+    @OneToOne
+    @JoinColumn(name = "prontuario_id")
+    var prontuario: Prontuario,
+
+    @Column
     var dataAgendamento: LocalDateTime? = null
 )

@@ -1,26 +1,18 @@
 package br.com.quiroHappy.ApiCrudQuiroHappy.mapper
 
-import br.com.quiroHappy.ApiCrudQuiroHappy.dto.AnamneseForm
+import br.com.quiroHappy.ApiCrudQuiroHappy.dto.AnamneseView
 import br.com.quiroHappy.ApiCrudQuiroHappy.model.Anamnese
-import br.com.quiroHappy.ApiCrudQuiroHappy.service.PacienteService
 import org.springframework.stereotype.Component
 
 @Component
-class AnamneseFormMapper(
-    private val pacienteService: PacienteService,
+class AnamneseMapper(
     private val pacienteMapper: PacienteMapper,
     private val prontuarioMapper: ProntuarioMapper
-): Mapper<AnamneseForm, Anamnese>{
-    override fun map(t: AnamneseForm): Anamnese {
+): Mapper<AnamneseView, Anamnese>{
+    override fun map(t: AnamneseView): Anamnese {
         val anamneseMapper = AnamneseMapper(pacienteMapper, prontuarioMapper)
         return Anamnese(
-            paciente = pacienteMapper.map(
-                pacienteService.getPacienteById(
-                    t.idPaciente
-                ),
-                anamneseMapper,
-                prontuarioMapper
-            ),
+            paciente = pacienteMapper.map(t.paciente,anamneseMapper, prontuarioMapper ),
             segmentos = t.segmentos,
             doencas = t.doencas,
             nomeCompleto = t.nomeCompleto,
